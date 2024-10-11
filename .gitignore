@@ -1,0 +1,56 @@
+# Byte-compiled Python files and cache directories
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+
+# Local environment and secrets
+.env
+*.env
+
+# Logs and temporary files
+*.log
+*.tmp
+*.pid
+
+# Development-related files
+.idea/
+.vscode/
+*.sublime-workspace
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore Python egg info and dist files
+*.egg-info/
+dist/
+build/
+eggs/
+
+# Ignore compiled C extensions
+*.so
+
+# Ignore pytest cache
+.cache/
+
+# Ignore Docker-related files
+
+# Ignore node_modules (if using Node.js dependencies)
+node_modules/
+
+# Ignore test-related files and coverage reports
+tests/__pycache__/
+coverage/
+*.cover
+*.pyc
+
+# Ignore pip dependency resolver cache
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
