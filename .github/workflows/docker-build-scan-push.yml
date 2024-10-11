@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - dev
-      
+
   workflow_dispatch:
 
 jobs:
@@ -28,10 +28,10 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest .
 
-      - name: Scan Docker image with Docker Scout
+      - name: Scan Docker image with Trivy
         run: |
-          docker scout cves ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest --exit-code 1 --severity high
-          
+          docker run --rm aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 1 ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
+
       - name: Push Docker image
         if: success()
         run: |
