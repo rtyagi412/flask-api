@@ -28,11 +28,12 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest .
 
-      - name: Scan Docker image with Trivy
-        run: |
-          docker run --rm aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 1 docker.io/${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
-
       - name: Push Docker image
         if: success()
         run: |
-          docker push docker.io/${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
+
+
+      - name: Scan Docker image with Trivy
+        run: |
+          docker run --rm aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 1 docker.io/${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
