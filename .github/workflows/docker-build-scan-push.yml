@@ -54,3 +54,24 @@ jobs:
       - name: Scan Docker image with Trivy
         run: |
           docker run --rm aquasec/trivy:latest image --severity CRITICAL,HIGH --exit-code 1 docker.io/${{ secrets.DOCKER_USERNAME }}/python-flask-app:latest
+
+  deploy-k8:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }
+
+      - name: Set AKS credentials
+        run: |
+          az aks get-credentials --resource-group ${{ secrets.AKS_RESOURCE_GROUP }} --name ${{ secrets.AKS_CLUSTER_NAME }}
+          
+      - name: Deploy to AKS
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+
+      - name: Verify deployment
+        run: |
+          kubectl rollout status deployment/flask-deployment
