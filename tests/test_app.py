@@ -11,7 +11,7 @@ class FlaskApiTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)  # Check for success status code
         data = response.get_json()
         self.assertIn('name', data)  # Check if 'name' key exists in response
-        self.assertEqual(data['name'], 'Flask API example')
+        self.assertEqual(data['name'], 'Flask API exampl')
 
     def test_invalid_route(self):
         response = self.app.get('/invalid-route')
